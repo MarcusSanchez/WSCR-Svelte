@@ -2,7 +2,7 @@
 
   import Chat from "./Chat/Chat.svelte";
   import SidePanel from "./SidePanel/SidePanel.svelte";
-  import { connection, messages, name, newMessageAlert, room } from "$stores";
+  import { connection, messages, name, newMessageAlert, room, log } from "$stores";
   import { onMount } from "svelte";
 
   function start(): void {
@@ -18,12 +18,11 @@
           });
           newMessage.data.fromClient = false;
         }
-        let log = document.getElementById("message-log") as HTMLDivElement;
-        let isAtBottom = log.scrollHeight === log.scrollTop + log.clientHeight;
+        let isAtBottom = $log.scrollHeight === $log.scrollTop + $log.clientHeight;
         $messages = [...$messages, newMessage];
         setTimeout(() => {
           if (isAtBottom) {
-            log.scrollTo(0, log.scrollHeight);
+            $log.scrollTo(0, $log.scrollHeight);
           } else {
             console.log("we made it here");
             $newMessageAlert = true;

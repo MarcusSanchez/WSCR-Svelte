@@ -9,7 +9,7 @@
   let roomNumber = '';
   let username = '';
   let joinButtonText = 'Join Room';
-  let button: HTMLTextAreaElement;
+  let button: HTMLButtonElement;
 
   onMount(() => {
     if (queriedRoom !== null && validateRoom(queriedRoom)) {
