@@ -1,7 +1,7 @@
 <script lang="ts">
-    import LogoBox from "./LogoBox/LogoBox.svelte";
+  import LogoBox from "./LogoBox/LogoBox.svelte";
 
-    const root = window.location.origin + window.location.pathname; // without query params
+  const root = window.location.origin + window.location.pathname; // without query params
 </script>
 
 <nav class="Navbar">
@@ -14,9 +14,9 @@
 </nav>
 
 <style>
-    .Navbar {
-        background-color: #e0e0e0;
-        border-bottom: 2px solid black;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+  .Navbar {
+    background-color: #e0e0e0;
+    border-bottom: 2px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 </style>
