@@ -7,7 +7,7 @@
 
   function start(): void {
     if (window["WebSocket"]) {
-      connection.set(new WebSocket(`wss://${window.location.host}/ws/${$name}/${$room}`));
+      $connection = new WebSocket(`ws://localhost:3000/ws/${$name}/${$room}`);
       $connection.onmessage = function (e) {
         let newMessage = JSON.parse(e.data);
         if (newMessage.type === "message") {
@@ -20,27 +20,27 @@
         }
         let log = document.getElementById("message-log") as HTMLDivElement;
         let isAtBottom = log.scrollHeight === log.scrollTop + log.clientHeight;
-        messages.set([...$messages, newMessage]);
+        $messages = [...$messages, newMessage];
         setTimeout(() => {
           if (isAtBottom) {
             log.scrollTo(0, log.scrollHeight);
           } else {
             console.log("we made it here");
-            newMessageAlert.set(true);
+            $newMessageAlert = true;
           }
         }, 0);
       };
       $connection.onclose = function () {
         let announcement = { type: "announcement", data: { type: "close", message: "Connection closed" } };
-        messages.set([...$messages, announcement]);
-        connection.set(null);
+        $messages = [...$messages, announcement];
+        $connection = null;
       };
     } else {
       let announcement = {
         type: "announcement",
         data: { type: "close", message: "Your browser does not support WebSockets." }
       };
-      messages.set([...$messages, announcement]);
+      $messages = [...$messages, announcement];
     }
   }
 
@@ -56,8 +56,8 @@
 </div>
 
 <style>
-  .Room {
-    padding: 4% 7% 2%;
-    margin-bottom: 50px;
-  }
+    .Room {
+        padding: 4% 7% 2%;
+        margin-bottom: 50px;
+    }
 </style>

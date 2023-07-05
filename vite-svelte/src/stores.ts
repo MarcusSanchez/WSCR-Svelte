@@ -9,3 +9,5 @@ export const isJoined = writable(false);
 export const messages: Writable<object[]> = writable([]);
 export const newMessageAlert = writable(false);
 export const connection: Writable<WebSocket | null> = writable(null);
+
+export const log: Writable<HTMLDivElement> = writable(null);

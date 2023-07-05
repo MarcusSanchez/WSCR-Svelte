@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { isJoined, name, room } from '$stores';
-  import { joinButtonFormatter, validateName, validateRoom } from './helpers.ts'
+  import { joinButtonFormatter, validateName, validateRoom } from './helpers.ts';
 
   let queryParams = new URLSearchParams(window.location.search);
   let queriedRoom = queryParams.get('room');
@@ -9,7 +9,7 @@
   let roomNumber = '';
   let username = '';
   let joinButtonText = 'Join Room';
-  let button: HTMLButtonElement;
+  let button: HTMLTextAreaElement;
 
   onMount(() => {
     if (queriedRoom !== null && validateRoom(queriedRoom)) {
@@ -60,9 +60,9 @@
       return false;
     }
 
-    name.set(username);
-    room.set(roomNumber);
-    isJoined.set(true);
+    $name = username;
+    $room = roomNumber;
+    $isJoined = true;
     return true;
   }
 </script>
