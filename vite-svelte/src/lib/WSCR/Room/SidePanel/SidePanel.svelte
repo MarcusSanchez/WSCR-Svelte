@@ -62,7 +62,7 @@
   <div class="Participants">
     {#each participants as participant}
       <p class="Participant">
-        {{participant}}
+        {participant}
       </p>
     {/each}
   </div>

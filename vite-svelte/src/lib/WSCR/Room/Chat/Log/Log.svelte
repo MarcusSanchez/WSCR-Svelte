@@ -11,7 +11,7 @@
   }
 </script>
 
-<div on:scroll="handleScroll" class="p-3 Log" bind:this={$log} id="message-log">
+<div on:scroll={handleScroll} class="p-3 Log" bind:this={$log} id="message-log">
   {#each $messages as message, index}
     {#if message.type === 'message'}
       <Message
