@@ -12,20 +12,16 @@
 </script>
 
 <div on:scroll={handleScroll} class="p-3 Log" bind:this={$log} id="message-log">
-  {#each $messages as message, index}
+  {#each $messages as message}
     {#if message.type === 'message'}
       <Message
-          key={index}
           name={message.data.name}
           message={message.data.message}
           fromClient={message.data.fromClient}
           time={message.data.time}
       />
     {:else}
-      <Announcement
-          key={index}
-          message={message.data.message}
-      />
+      <Announcement message={message.data.message} />
     {/if}
   {/each}
 </div>

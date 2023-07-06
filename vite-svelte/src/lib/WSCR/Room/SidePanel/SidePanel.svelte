@@ -10,21 +10,22 @@
 
   function fetchRoomInfo() {
     fetch(`http://localhost:3000/info/${$room}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data['error'] === "true") {
-          console.log(data['errorMessage']);
-          return;
-        }
-        roomCount = data['roomCount'];
-        participants = data['participants'];
-      })
-      .catch(error => console.log(error));
+        .then(response => response.json())
+        .then(data => {
+          if (data['error'] === "true") {
+            return;
+          }
+          roomCount = data['roomCount'];
+          participants = data['participants'];
+        })
+        .catch(error => console.log(error));
   }
 
-  $: {
-    if ($messages.length === 1 && $messages[$messages.length - 1].data === "join") {
+  $: sideEffect([$messages])
+  function sideEffect(_): void {
+    if ($messages.length === 1 && $messages[0].data.type === "join") {
       fetchRoomInfo();
+      return;
     }
     let lastMessage = $messages[$messages.length - 1];
     if (lastMessage !== undefined && lastMessage.type === "announcement") {
@@ -41,15 +42,15 @@
 
   function handleCopyToClipboard(): void {
     navigator.clipboard.writeText(window.location.origin + "/?room=" + $room)
-      .then(() => {
-        clipboardClasses = 'fa-solid fa-check Clipboard';
-        copiedClasses = 'ps-2';
-        setTimeout(() => {
-          clipboardClasses = 'fa-regular fa-clipboard Clipboard';
-          copiedClasses = 'hidden';
-        }, 1000);
-      })
-      .catch();
+        .then(() => {
+          clipboardClasses = 'fa-solid fa-check Clipboard';
+          copiedClasses = 'ps-2';
+          setTimeout(() => {
+            clipboardClasses = 'fa-regular fa-clipboard Clipboard';
+            copiedClasses = 'hidden';
+          }, 1000);
+        })
+        .catch();
   }
 </script>
 
