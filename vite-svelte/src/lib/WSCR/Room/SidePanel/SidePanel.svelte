@@ -35,7 +35,7 @@
       } else if (lastMessage.data.type === "leave") {
         roomCount -= 1;
         const index = participants.indexOf(lastMessage.data.name);
-        participants.slice(index, 1);
+        participants.splice(index, 1);
         participants = participants;
       }
     }
