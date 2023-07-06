@@ -5,7 +5,7 @@
   let textAreaText = '';
 
   function sendMessage(): boolean {
-    if ((!$connection || textAreaText.replace(/^]s+/, '').length === 0) || messageCount >= 3) {
+    if (!$connection || textAreaText.replace(/^]s+/, '').length === 0 || messageCount >= 3) {
       if (messageCount >= 3) {
         let announcement = {
           type: "announcement",

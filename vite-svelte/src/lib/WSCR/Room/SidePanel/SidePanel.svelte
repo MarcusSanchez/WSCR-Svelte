@@ -4,9 +4,9 @@
   let roomCount = 0;
   let participants: string[] = [];
 
-  let clipboardClasses: string = "fa-regular fa-clipboard Clipboard"
-  let copiedClasses: string = 'hidden';
-  let inviteLink: string = window.location.host + `/?room=${$room}`;
+  let clipboardClasses = "fa-regular fa-clipboard Clipboard"
+  let copiedClasses = 'hidden';
+  let inviteLink = window.location.host + `/?room=${$room}`;
 
   function fetchRoomInfo() {
     fetch(window.location.origin + `/info/${$room}`)
@@ -21,7 +21,7 @@
         .catch(error => console.log(error));
   }
 
-  $: sideEffect([$messages])
+  $: sideEffect([$messages]);
   function sideEffect(_): void {
     if ($messages.length === 1 && $messages[0].data.type === "join") {
       fetchRoomInfo();
