@@ -9,7 +9,7 @@
   let inviteLink: string = window.location.host + `/?room=${$room}`;
 
   function fetchRoomInfo() {
-    fetch(`http://localhost:3000/info/${$room}`)
+    fetch(window.location.origin + `/info/${$room}`)
         .then(response => response.json())
         .then(data => {
           if (data['error'] === "true") {

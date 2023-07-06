@@ -7,7 +7,7 @@
 
   function start(): void {
     if (window["WebSocket"]) {
-      $connection = new WebSocket(`ws://localhost:3000/ws/${$name}/${$room}`);
+      $connection = new WebSocket(`wss://${window.location.host}/ws/${$name}/${$room}`);
       $connection.onmessage = function (e) {
         let newMessage = JSON.parse(e.data);
         if (newMessage.type === "message") {
