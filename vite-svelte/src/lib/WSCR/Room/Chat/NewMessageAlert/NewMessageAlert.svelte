@@ -7,18 +7,11 @@
   }
 </script>
 
-<div on:scroll={scrollToBottom} on:click={scrollToBottom} class="NMA hover:cursor-pointer">
-  <b class="Alert">New Message...</b>
+<div on:scroll={scrollToBottom} class="flex justify-center mt-[-40px]">
+  <b on:click={scrollToBottom} class="Alert hover:cursor-pointer">New Message...</b>
 </div>
 
 <style>
-    .NMA {
-        position: absolute;
-        margin-top: -25px;
-        left: 50%;
-        transform: translateY(-50%);
-    }
-
     .Alert {
         padding: 0 5px;
         border-radius: 5px;

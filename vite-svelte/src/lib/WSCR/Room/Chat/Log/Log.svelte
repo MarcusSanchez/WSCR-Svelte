@@ -14,12 +14,7 @@
 <div on:scroll={handleScroll} class="p-3 Log" bind:this={$log} id="message-log">
   {#each $messages as message}
     {#if message.type === 'message'}
-      <Message
-          name={message.data.name}
-          message={message.data.message}
-          fromClient={message.data.fromClient}
-          time={message.data.time}
-      />
+      <Message {...message.data} />
     {:else}
       <Announcement message={message.data.message} />
     {/if}

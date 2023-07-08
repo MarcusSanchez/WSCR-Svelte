@@ -2,8 +2,8 @@
   export let
       name: string,
       message: string,
-      fromClient: boolean,
-      time: string
+      time: string,
+      fromClient: boolean
   ;
 </script>
 

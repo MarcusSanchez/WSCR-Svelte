@@ -1,5 +1,6 @@
 <script lang="ts">
   import { connection, log, messages, name } from '$stores';
+  import { Announcement, Message } from "@/models";
 
   let messageCount = 0;
   let textAreaText = '';
@@ -7,7 +8,7 @@
   function sendMessage(): boolean {
     if (!$connection || textAreaText.replace(/^]s+/, '').length === 0 || messageCount >= 3) {
       if (messageCount >= 3) {
-        let announcement = {
+        let announcement: Announcement = {
           type: "announcement",
           data: {
             name: "server",
@@ -28,8 +29,8 @@
       messageCount--;
     }, 5000);
     $connection.send(textAreaText);
-    const time = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-    let message = {
+    let time = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    let message: Message = {
       type: "message",
       data: {
         name: $name,

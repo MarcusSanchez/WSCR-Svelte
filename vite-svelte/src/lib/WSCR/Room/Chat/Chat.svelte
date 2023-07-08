@@ -5,7 +5,7 @@
   import MessageBox from './MessageBox/MessageBox.svelte';
 </script>
 
-<div class="w-3/4 relative">
+<div class="col-span-3 relative">
   <Log />
   {#if $newMessageAlert}
     <NewMessageAlert />

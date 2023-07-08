@@ -2,14 +2,15 @@
 
   import Chat from "./Chat/Chat.svelte";
   import SidePanel from "./SidePanel/SidePanel.svelte";
-  import { connection, messages, name, newMessageAlert, room, log } from "$stores";
+  import { connection, log, messages, name, newMessageAlert, room } from "$stores";
   import { onMount } from "svelte";
+  import type { Announcement, Message } from "@/models";
 
   function start(): void {
     if (window["WebSocket"]) {
       $connection = new WebSocket(`wss://${window.location.host}/ws/${$name}/${$room}`);
-      $connection.onmessage = function (e) {
-        let newMessage = JSON.parse(e.data);
+      $connection.onmessage = function (e: MessageEvent) {
+        let newMessage: Announcement | Message = JSON.parse(e.data);
         if (newMessage.type === "message") {
           newMessage.data.time = new Date().toLocaleTimeString('en-US', {
             hour: 'numeric',
@@ -30,14 +31,22 @@
         }, 0);
       };
       $connection.onclose = function () {
-        let announcement = { type: "announcement", data: { type: "close", message: "Connection closed" } };
+        let announcement: Announcement = {
+          type: "announcement",
+          data: {
+            type: "close",
+            message: "Connection closed"
+          }
+        };
         $messages = [...$messages, announcement];
         $connection = null;
       };
     } else {
-      let announcement = {
+      let announcement: Announcement = {
         type: "announcement",
-        data: { type: "close", message: "Your browser does not support WebSockets." }
+        data: {
+          type: "close",
+          message: "Your browser does not support WebSockets." }
       };
       $messages = [...$messages, announcement];
     }
@@ -49,7 +58,7 @@
 
 </script>
 
-<div class="flex gap-4 Room">
+<div class="grid grid-cols-4 gap-5 Room">
   <Chat />
   <SidePanel />
 </div>

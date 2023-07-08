@@ -1,5 +1,6 @@
 <script lang="ts">
   import { messages, room } from "$stores";
+  import type { Announcement } from "@/models";
 
   let roomCount = 0;
   let participants: string[] = [];
@@ -23,7 +24,7 @@
 
   $: sideEffect([$messages]);
   function sideEffect(_): void {
-    if ($messages.length === 1 && $messages[0].data.type === "join") {
+    if ($messages.length === 1 && ($messages[0].data as Announcement).type === "join") {
       fetchRoomInfo();
       return;
     }
@@ -55,7 +56,7 @@
   }
 </script>
 
-<div class="w-1/4 SidePanel">
+<div class="col-span-1 SidePanel">
   <h3 class="text-center font-semibold text-3xl my-4">Room Information</h3>
   <hr class="mb-4 border-gray-400" />
   <p><b>Room Number: </b>{$room}</p>
@@ -73,7 +74,7 @@
     {inviteLink}
     <i class="{clipboardClasses}"></i>
   </p>
-  <b class="{copiedClasses}">Copied</b>
+  <b class="{copiedClasses}">Copied!</b>
 </div>
 
 <style>
