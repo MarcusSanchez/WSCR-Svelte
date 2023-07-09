@@ -24,7 +24,7 @@
 
   $: sideEffect([$messages]);
   function sideEffect(_): void {
-    if ($messages.length === 1 && ($messages[0].data as Announcement).type === "join") {
+    if ($messages.length === 1 && ($messages[0] as Announcement).data.type === "join") {
       fetchRoomInfo();
       return;
     }
