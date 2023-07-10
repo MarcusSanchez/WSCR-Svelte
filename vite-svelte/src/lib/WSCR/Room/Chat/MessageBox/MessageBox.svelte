@@ -1,6 +1,6 @@
 <script lang="ts">
   import { connection, log, messages, name } from '$stores';
-  import { Announcement, Message } from "@/models";
+  import type { Announcement, Message } from "@/models";
 
   let messageCount = 0;
   let textAreaText = '';
