@@ -8,8 +8,9 @@
   let clipboardClasses = "fa-regular fa-clipboard Clipboard"
   let copiedClasses = 'hidden';
 
-  let queryIndex = window.location.href.indexOf('?');
-  let inviteLink = window.location.href.slice(0, queryIndex) + `?room=${$room}`;
+  let href = window.location.href;
+  let queryIndex = href.indexOf('?') !== -1 ? href.indexOf('?') : href.length;
+  let inviteLink = href.substring(0, queryIndex) + `?room=${$room}`;
 
   function fetchRoomInfo() {
     fetch(window.location.origin + `/info/${$room}`)
