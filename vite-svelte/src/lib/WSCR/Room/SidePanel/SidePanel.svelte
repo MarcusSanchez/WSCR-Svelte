@@ -7,7 +7,9 @@
 
   let clipboardClasses = "fa-regular fa-clipboard Clipboard"
   let copiedClasses = 'hidden';
-  let inviteLink = window.location.host + `/?room=${$room}`;
+
+  let queryIndex = window.location.href.indexOf('?');
+  let inviteLink = window.location.href.slice(0, queryIndex) + `?room=${$room}`;
 
   function fetchRoomInfo() {
     fetch(window.location.origin + `/info/${$room}`)
@@ -43,7 +45,7 @@
   }
 
   function handleCopyToClipboard(): void {
-    navigator.clipboard.writeText(window.location.origin + "/?room=" + $room)
+    navigator.clipboard.writeText(inviteLink)
         .then(() => {
           clipboardClasses = 'fa-solid fa-check Clipboard';
           copiedClasses = 'ps-2';

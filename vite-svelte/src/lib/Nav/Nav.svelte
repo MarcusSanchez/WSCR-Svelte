@@ -1,7 +1,8 @@
 <script lang="ts">
   import LogoBox from "./LogoBox/LogoBox.svelte";
 
-  const root = window.location.origin + window.location.pathname; // without query params
+  let queryIndex = window.location.href.indexOf('?');
+  const root = window.location.href.slice(0, queryIndex);
 </script>
 
 <nav class="Navbar">
